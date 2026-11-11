@@ -28,5 +28,24 @@ public class FactoryRobotHazardAnalyzer {
         System.out.println("Arm Precision: " + armPrecision);
         System.out.println("Worker Density: " + workerDensity);
         System.out.println("Machinery State: " + machineryState);
+
+        double machineRiskFactor = getMachineRiskFactor(machineryState);
+
+        // Calculates the hazard risk score using the given formula.
+        double hazardRisk = ((1.0 - armPrecision) * 15.0)
+                + (workerDensity * machineRiskFactor);
+
+        // Displays the calculated hazard risk score.
+        System.out.println("Robot Hazard Risk Score: " + hazardRisk);
+    }
+    private static double getMachineRiskFactor(String machineryState) {
+
+        if (machineryState.equals("Worn")) {
+            return 1.3;
+        } else if (machineryState.equals("Faulty")) {
+            return 2.0;
+        } else {
+            return 3.0;
+        }
     }
 }
